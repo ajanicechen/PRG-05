@@ -28,3 +28,7 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('register');
 });
+
+Route::get('/add_character', function () {
+    return view('addCharacter');
+});
