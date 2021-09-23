@@ -50,7 +50,8 @@
         </div>
     </nav>
 </header>
-@yield('welcome')
-@yield('newChar')
+    <div class="content">
+        @yield('content')
+    </div>
 </body>
 </html>
