@@ -17,7 +17,7 @@ class CreateCharactersTable extends Migration
             $table->id();
             $table->string('charName');
             $table->string('charVision');
-            $table->string('charLore');
+            $table->text('charLore');
             $table->string('charPortrait');
             $table->timestamps();
         });
