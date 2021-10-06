@@ -4,14 +4,14 @@
             <h1>Characters</h1>
             <div class="row">
                 @foreach($characters as $character)
-                <div class="col-4 card mr-3" style="width: 18rem;">
+                <div class="col-4 card mr-3 mb-3" style="width: 18rem;">
                     <img class="card-img-top" src="{{$character->charPortrait}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$character->charName}}</h5>
                         <p class="card-title">Vision: {{$character->charVision}}</p>
                         <p class="card-text">{{$character->charLore}}</p>
-                        <a href="#" class="btn btn-primary">Favorite</a>
                     </div>
+                    <a href="#" class="btn btn-primary mb-3">Favorite</a>
                 </div>
                 @endforeach
             </div>
