@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CharacterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,3 +33,11 @@ Route::get('/register', function () {
 Route::get('/add_character', function () {
     return view('addCharacter');
 });
+
+Route::get('/characters', [CharacterController::class,'index']);
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('addCharacter',[CharacterController::class,'create']);
+Route::post('addCharacter',[CharacterController::class,'store']);
