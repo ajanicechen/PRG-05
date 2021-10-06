@@ -9,4 +9,11 @@ class Character extends Model
 {
 
     use HasFactory;
+    protected $table = 'characters';
+    protected $fillable = [
+        'charName',
+        'charVision',
+        'charLore',
+        'charPortrait'
+    ];
 }
