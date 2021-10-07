@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminApp')
 @section('content')
     <div class="container">
         @if(session('status'))
@@ -9,7 +9,7 @@
                 <h1>Add New Character</h1>
             </div>
             <div class="card-body">
-                <form action="{{ url('addCharacter') }}" method="POST">
+                <form action="{{ url('add-character') }}" method="POST">
                     @csrf
                     <div class="form-group row">
                         <label for="charName" class="col-sm-2 col-form-label">Character Name</label>
