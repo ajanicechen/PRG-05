@@ -32,8 +32,14 @@ class CharacterController extends Controller
         $character->charLore = $request->input('charLore');
         $character->charPortrait = $request->input('charPortrait');
         $character->save();
-//        return redirect()->with('status','Character Added Succesfully');
-        $characters = Character::all();
-        return redirect('/overview');
+        return redirect()->back()->with('status','Character Added Succesfully');
+//        $characters = Character::all();
+//        return redirect('/overview');
+    }
+
+    public function destroy($id){
+        $character = Character::find($id);
+        $character->delete();
+        return redirect()->back()->with('status','Character Deleted Successfully');
     }
 }
