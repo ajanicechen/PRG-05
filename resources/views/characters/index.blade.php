@@ -4,7 +4,7 @@
             <h1>Characters</h1>
             <div class="row">
                 @foreach($characters as $character)
-                <div class="col-2 card"> <!-- style="width: 18rem;"-->
+                <div class="col-4 card"> <!-- style="width: 18rem;"-->
                     <img class="card-img-top" src="{{$character->charPortrait}}" alt="Card image cap">
                     <div class="card-body">
                         <h5 class="card-title">{{$character->charName}}</h5>
