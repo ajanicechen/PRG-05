@@ -21,6 +21,11 @@ class CharacterController extends Controller
         return view('/admin/overview',['characters' => $characters]);
     }
 
+    public function edit($id){
+        $character = Character::find($id);
+        return view('/admin/editCharacter', ['character' => $character]);
+    }
+
     public function create(){
         return view('admin/addCharacter');
     }
@@ -35,6 +40,16 @@ class CharacterController extends Controller
         return redirect()->back()->with('status','Character Added Succesfully');
 //        $characters = Character::all();
 //        return redirect('/overview');
+    }
+
+    public function update(Request $request, $id){
+        $character = Character::find($id);
+        $character->charName = $request->input('charName');
+        $character->charVision = $request->input('charVision');
+        $character->charLore = $request->input('charLore');
+        $character->charPortrait = $request->input('charPortrait');
+        $character->update();
+        return redirect()->back()->with('status','Character Updated Succesfully');
     }
 
     public function destroy($id){
