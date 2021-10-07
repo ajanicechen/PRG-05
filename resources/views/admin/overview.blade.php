@@ -14,21 +14,21 @@
                         <th scope="col">ID</th>
                         <th scope="col">Name</th>
                         <th scope="col">Vision</th>
-                        <th scope="col">Lore</th>
+                        <th class="description">Lore</th>
                         <th scope="col">Portrait</th>
                         <th colspan="2"></th>
-                        <th><a href="">Log out</th>
+                        <th><a href="">Logout</a></th>
                     </tr>
                     @foreach($characters as $character)
                     <tr>
-                        <td><?= htmlentities($character["id"])?></td>
-                        <td><?= htmlentities($character["charName"])?></td>
-                        <td><?= htmlentities($character["charVision"])?></td>
-                        <td><?= htmlentities($character["charLore"])?></td>
-                        <td><?= htmlentities($character["charPortrait"])?></td>
-{{--                        <td><a href="details.php?id=<?= $value['id'] ?>">Details</a></td>--}}
-{{--                        <td><a href="edit.php?id=<?= $value['id'] ?>">Edit</a></td>--}}
-{{--                        <td><a href="delete.php?id=<?= $value['id'] ?>">Delete</a></td>--}}
+                        <td>{{ $character["id"] }}</td>
+                        <td>{{ $character["charName"] }}</td>
+                        <td>{{ $character["charVision"] }}</td>
+                        <td>{{ $character["charLore"] }}</td>
+                        <td>{{ $character["charPortrait"] }}</td>
+                        <td><a href="">Details</a></td>
+                        <td><a href="">Edit</a></td>
+                        <td><a href="{{ url('delete-character/'.$character["id"]) }}">Delete</a></td>
                     </tr>
                     @endforeach
                 </table>
