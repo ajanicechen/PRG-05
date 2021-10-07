@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.adminApp')
 @section('content')
     <div class="container">
         @if(session('status'))
@@ -27,7 +27,7 @@
                         <td>{{ $character["charLore"] }}</td>
                         <td>{{ $character["charPortrait"] }}</td>
                         <td><a href="">Details</a></td>
-                        <td><a href="">Edit</a></td>
+                        <td><a href="{{ url('edit-character/'.$character["id"]) }}">Edit</a></td>
                         <td><a href="{{ url('delete-character/'.$character["id"]) }}">Delete</a></td>
                     </tr>
                     @endforeach
