@@ -34,16 +34,13 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/">Home</a>
+                            <a class="nav-link" href="/home">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/about">About</a>
+                            <a class="nav-link" href="/overview">Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/characters">Characters</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/add_characters">Characters</a>
+                            <a class="nav-link" href="/add-character">Add Character</a>
                         </li>
                     </ul>
 
