@@ -1651,6 +1651,9 @@ pre code {
   margin-bottom: 1rem;
   color: #212529;
 }
+.description{
+    white-space: pre-wrap;
+}
 .table th,
 .table td {
   padding: 0.75rem;
