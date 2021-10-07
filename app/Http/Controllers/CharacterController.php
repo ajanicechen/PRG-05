@@ -30,6 +30,11 @@ class CharacterController extends Controller
         return view('admin/addCharacter');
     }
 
+    public function read($id){
+        $character = Character::find($id);
+        return view('/admin/read', ['character' => $character]);
+    }
+
     public function store(Request $request){
         $character = new Character;
         $character->charName = $request->input('charName');

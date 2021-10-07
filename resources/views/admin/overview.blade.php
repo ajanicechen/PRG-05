@@ -26,7 +26,7 @@
                         <td>{{ $character["charVision"] }}</td>
                         <td>{{ $character["charLore"] }}</td>
                         <td>{{ $character["charPortrait"] }}</td>
-                        <td><a href="">Details</a></td>
+                        <td><a href="{{ url('details/'.$character["id"]) }}">Details</a></td>
                         <td><a href="{{ url('edit-character/'.$character["id"]) }}">Edit</a></td>
                         <td><a href="{{ url('delete-character/'.$character["id"]) }}">Delete</a></td>
                     </tr>
