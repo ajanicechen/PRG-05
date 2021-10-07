@@ -42,3 +42,5 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('addCharacter',[CharacterController::class,'create']);
 Route::post('addCharacter',[CharacterController::class,'store']);
+
+Route::get('delete-character/{id}', [CharacterController::class, 'destroy']);
