@@ -30,9 +30,9 @@ Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/add_character', function () {
-    return view('addCharacter');
-});
+//Route::get('/add_character', function () {
+//    return view('addCharacter');
+//});
 
 Route::get('/characters', [CharacterController::class,'index']);
 Route::get('/overview', [CharacterController::class,'overview']);
@@ -40,7 +40,10 @@ Route::get('/overview', [CharacterController::class,'overview']);
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('addCharacter',[CharacterController::class,'create']);
-Route::post('addCharacter',[CharacterController::class,'store']);
 
+Route::get('add-character',[CharacterController::class,'create']);
+Route::post('add-character',[CharacterController::class,'store']);
+
+Route::get('edit-character/{id}', [CharacterController::class, 'edit']);
+Route::put('update-character/{id}', [CharacterController::class, 'update']);
 Route::get('delete-character/{id}', [CharacterController::class, 'destroy']);
