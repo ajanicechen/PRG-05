@@ -16,8 +16,13 @@ class CharacterController extends Controller
         return view('/characters/index', ['characters' => $characters]);
     }
 
+    public function overview(){
+        $characters = Character::all();
+        return view('/admin/overview',['characters' => $characters]);
+    }
+
     public function create(){
-        return view('characters/addCharacter');
+        return view('admin/addCharacter');
     }
 
     public function store(Request $request){
@@ -29,6 +34,6 @@ class CharacterController extends Controller
         $character->save();
 //        return redirect()->with('status','Character Added Succesfully');
         $characters = Character::all();
-        return redirect('/characters');
+        return redirect('/overview');
     }
 }

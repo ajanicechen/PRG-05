@@ -35,6 +35,7 @@ Route::get('/add_character', function () {
 });
 
 Route::get('/characters', [CharacterController::class,'index']);
+Route::get('/overview', [CharacterController::class,'overview']);
 
 Auth::routes();
 
