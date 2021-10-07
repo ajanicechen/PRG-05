@@ -23,7 +23,7 @@ class CharacterController extends Controller
 
     public function edit($id){
         $character = Character::find($id);
-        return view('/admin/editCharacter', ['character' => $character]);
+        return view('/admin/edit', ['character' => $character]);
     }
 
     public function create(){
