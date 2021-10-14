@@ -13,8 +13,10 @@
                             {{ session('status') }}
                         </div>
                     @endif
-
-                    {{ __('You are logged in!') }}
+                        <div class="text-center">
+                            <img src="https://static.wikia.nocookie.net/gensin-impact/images/1/1b/Character_Paimon_Portrait.png">
+                            <p>{{ __('Hewwo Master uwu') }}</p>
+                        </div>
                 </div>
             </div>
         </div>
