@@ -21,7 +21,7 @@ class CharacterController extends Controller
     //[Admin] View list of all characters in table
     public function overview(){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -32,7 +32,7 @@ class CharacterController extends Controller
     //[admin] edit form
     public function edit($id){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -43,7 +43,7 @@ class CharacterController extends Controller
     //[admin] add a new character
     public function create(){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -53,7 +53,7 @@ class CharacterController extends Controller
     //[admin] details character
     public function read($id){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -64,7 +64,7 @@ class CharacterController extends Controller
     //[admin] save new character
     public function store(Request $request){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -82,7 +82,7 @@ class CharacterController extends Controller
     //[admin] saves new data of character
     public function update(Request $request, $id){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
@@ -98,7 +98,7 @@ class CharacterController extends Controller
     //[admin] delete character
     public function destroy($id){
 
-        if(auth()->guest() || auth()->user()->username != 'hewwohana'){
+        if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
