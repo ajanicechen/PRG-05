@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
+    //View all characters
     public function index(){
 //        //get data from the character model
         $characters = Character::all();
@@ -16,25 +17,30 @@ class CharacterController extends Controller
         return view('/characters/index', ['characters' => $characters]);
     }
 
+    //[Admin] View list of all characters in table
     public function overview(){
         $characters = Character::all();
         return view('/admin/overview',['characters' => $characters]);
     }
 
+    //[admin] edit form
     public function edit($id){
         $character = Character::find($id);
         return view('/admin/edit', ['character' => $character]);
     }
 
+    //[admin] add a new character
     public function create(){
         return view('admin/addCharacter');
     }
 
+    //[admin] details character
     public function read($id){
         $character = Character::find($id);
         return view('/admin/read', ['character' => $character]);
     }
 
+    //[admin] save new character
     public function store(Request $request){
         $character = new Character;
         $character->charName = $request->input('charName');
@@ -47,6 +53,7 @@ class CharacterController extends Controller
 //        return redirect('/overview');
     }
 
+    //[admin] saves new data of character
     public function update(Request $request, $id){
         $character = Character::find($id);
         $character->charName = $request->input('charName');
@@ -57,6 +64,7 @@ class CharacterController extends Controller
         return redirect()->back()->with('status','Character Updated Succesfully');
     }
 
+    //[admin] delete character
     public function destroy($id){
         $character = Character::find($id);
         $character->delete();
