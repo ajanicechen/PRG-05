@@ -87,9 +87,19 @@
                             </li>
                         @endguest
                     </ul>
+
                 </div>
             </div>
         </nav>
+
+        <!-- search bar-->
+        <div class="row height d-flex justify-content-center align-items-center card">
+            <div class="col-md-6 card-body">
+                <form method="GET" action="#" class="">
+                    <input type="text" name="search" placeholder="Search" class="form-control form-input">
+                </form>
+            </div>
+        </div>
 
         <main class="py-4">
             @yield('content')
