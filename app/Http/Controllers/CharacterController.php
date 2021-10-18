@@ -9,13 +9,30 @@ use Illuminate\Http\Request;
 class CharacterController extends Controller
 {
     //View all characters
-    public function index(){
-//        //get data from the character model
-        $characters = Character::all();
-//        //is same as SELECT * FROM characters
+//    public function index(){
+////        //get data from the character model
+//        $characters = Character::all();
+////        //is same as SELECT * FROM characters
+//
+//        //pass this data to the character view
+//        return view('/characters/index', ['characters' => $characters]);
+//    }
 
-        //pass this data to the character view
-        return view('/characters/index', ['characters' => $characters]);
+    //search a character
+    public function search(){
+        //if search
+        if(request('search')){
+            //show latest first
+            $character = Character::latest();
+            $character->where('charName', 'like', '%' . request('search') . '%');
+            return view('/characters/index', ['characters' => $character->get()]);
+
+        }
+        else{
+            //show first
+            $character = Character::all();
+            return view('/characters/index', ['characters' => $character]);
+        }
     }
 
     //[Admin] View list of all characters in table
@@ -79,7 +96,7 @@ class CharacterController extends Controller
 //        return redirect('/overview');
     }
 
-    //[admin] saves new data of character
+    //[admin] saves new data of old character
     public function update(Request $request, $id){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
