@@ -22,14 +22,15 @@ class CharacterController extends Controller
     public function search(){
         //if search
         if(request('search')){
-            //show latest first
+            //last added > first added
             $character = Character::latest();
-            $character->where('charName', 'like', '%' . request('search') . '%');
+            $character->where('charName', 'like', '%' . request('search') . '%')
+                ->orWhere('charVision', 'like', '%' . request('search') . '%')
+                ->orWhere('charLore', 'like', '%' . request('search') . '%');
             return view('/characters/index', ['characters' => $character->get()]);
-
         }
         else{
-            //show first
+            //first added > last added
             $character = Character::all();
             return view('/characters/index', ['characters' => $character]);
         }
@@ -85,6 +86,13 @@ class CharacterController extends Controller
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
+        $request->validate([
+            'charName' => 'required',
+            'charVision' => 'required',
+            'charLore' => 'required',
+            'charPortrait' => 'required',
+        ]);
+
         $character = new Character;
         $character->charName = $request->input('charName');
         $character->charVision = $request->input('charVision');
@@ -102,6 +110,13 @@ class CharacterController extends Controller
         if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
+
+        $request->validate([
+            'charName' => 'required',
+            'charVision' => 'required',
+            'charLore' => 'required',
+            'charPortrait' => 'required',
+        ]);
 
         $character = Character::find($id);
         $character->charName = $request->input('charName');
