@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CharacterController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -35,15 +36,15 @@ Route::get('/register', function () {
 //});
 
 Route::get('/characters', [CharacterController::class,'index']);
-Route::get('/overview', [CharacterController::class,'overview']);
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+//admin routes
+Route::get('/overview', [CharacterController::class,'overview']);
 Route::get('add-character',[CharacterController::class,'create']);
 Route::post('add-character',[CharacterController::class,'store']);
-
 Route::get('details/{id}', [CharacterController::class, 'read']);
 Route::get('edit-character/{id}', [CharacterController::class, 'edit']);
 Route::put('update-character/{id}', [CharacterController::class, 'update']);

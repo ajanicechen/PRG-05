@@ -8,19 +8,9 @@ use Illuminate\Http\Request;
 
 class CharacterController extends Controller
 {
-    //View all characters
-//    public function index(){
-////        //get data from the character model
-//        $characters = Character::all();
-////        //is same as SELECT * FROM characters
-//
-//        //pass this data to the character view
-//        return view('/characters/index', ['characters' => $characters]);
-//    }
-
-    //search a character
-    public function search(){
-        //if search
+    //load all characters in index
+    public function index(){
+        //if searched, results only
         if(request('search')){
             //last added > first added
             $character = Character::latest();
@@ -29,6 +19,7 @@ class CharacterController extends Controller
                 ->orWhere('charLore', 'like', '%' . request('search') . '%');
             return view('/characters/index', ['characters' => $character->get()]);
         }
+        //loads all characters
         else{
             //first added > last added
             $character = Character::all();
@@ -42,7 +33,15 @@ class CharacterController extends Controller
         if(auth()->guest() || auth()->user()->role != 'admin'){
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
-
+        //search
+        if(request('search')){
+            //last added > first added
+            $character = Character::latest();
+            $character->where('charName', 'like', '%' . request('search') . '%')
+                ->orWhere('charVision', 'like', '%' . request('search') . '%')
+                ->orWhere('charLore', 'like', '%' . request('search') . '%');
+            return view('/admin/overview', ['characters' => $character->get()]);
+        }
         $characters = Character::all();
         return view('/admin/overview',['characters' => $characters]);
     }

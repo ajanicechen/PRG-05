@@ -4,6 +4,14 @@
         @if(session('status'))
             <h6 class="alert alert-success">{{ session('status') }}</h6>
         @endif
+        {{--      Searchbar      --}}
+        <div class="row height d-flex justify-content-center align-items-center">
+            <div class="col-md-6 card-body">
+                <form method="GET" action="#" class="">
+                    <input type="text" name="search" placeholder="Search" value="{{ request('search') }}" class="form-control form-input">
+                </form>
+            </div>
+        </div>
         <div class="card">
             <div class="card-header">
                 <h1>Overview All Characters</h1>
