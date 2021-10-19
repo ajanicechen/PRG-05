@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('content')
         <div class="container">
+            {{--      Searchbar      --}}
             <div class="row height d-flex justify-content-center align-items-center">
                 <div class="col-md-6 card-body">
                     <form method="GET" action="#" class="">
