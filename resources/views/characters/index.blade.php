@@ -39,36 +39,23 @@
                             <p class="card-title">Vision: {{$character->charVision}}</p>
                             <p class="card-text">{{$character->charLore}}</p>
                         </div>
-                        <a href="{{ url('/characters/' . $character->id) }}" class="btn btn-primary mb-3">Details</a>
+{{--                        <a href="{{ url('/characters/' . $character->id) }}" class="btn btn-primary mb-3">Details</a>--}}
 
-                        <div>
-
-                            @if($character->user()->find(Auth::id()))
-                                <form action="{{ route('unfavorite', $character)  }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <div>
-                                        <div>
-                                            <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
-                                            <button type="submit" class="btn btn-danger mb-3">Unfavorite</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            @elseif($character->user()->find(Auth::id()) === null)
-                                <form action="{{ route('favorite', $character)  }}" method="post" enctype="multipart/form-data">
-                                    @csrf
-                                    <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
-                                    <button type="submit" class="btn btn-primary mb-3">Favorite</button>
-                                </form>
-                            @endif
-                        </div>
-
-
-                        {{-- check if character has a relation with id of the user --}}
-{{--                        @if($character->user()->find(Auth::id()))--}}
-{{--                            <button class="btn btn-primary mb-3">Unfavorite</button>--}}
-{{--                            @elseif($character->user()->find(Auth::id() === null))--}}
-{{--                            <button class="btn btn-primary mb-3">Favorite</button>--}}
-{{--                        @endif--}}
+                        {{-- If already faved, [unfav button] --}}
+                        @if($character->user()->find(Auth::id()))
+                            <form class="justify-content-center" action="{{ route('unfavorite', $character)  }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
+                                <button type="submit" class="btn btn-danger mb-3">Unfavorite</button>
+                            </form>
+                        {{-- if not faved, [fave button] --}}
+                        @elseif($character->user()->find(Auth::id()) === null)
+                            <form action="{{ route('favorite', $character)  }}" method="post" enctype="multipart/form-data">
+                                @csrf
+                                <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
+                                <button type="submit" class="btn btn-primary mb-3">Favorite</button>
+                            </form>
+                        @endif
                     </div>
                     @endforeach
                 </div>
