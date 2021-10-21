@@ -21,4 +21,8 @@ class Character extends Model
     public function user():BelongsToMany{
         return $this->belongsToMany(User::class);
     }
+
+    public function vision():BelongsToMany{
+        return $this->belongsToMany(Vision::class);
+    }
 }
