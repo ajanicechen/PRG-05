@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\User;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -153,5 +154,21 @@ class CharacterController extends Controller
         $character->save();
 
         return redirect()->back()->with('status', 'Character active status changed');
+    }
+
+    public function favorite(Request $request, Character $character){
+        $user = User::find(auth()->id());
+        $character = Character::find($request->input('id'));
+        $character->save();
+        $character->user()->attach($user);
+        return redirect()->back()->with('status', 'Character has been added to favorites');
+    }
+
+    public function unfavorite(Request $request, Character $character){
+        $user = User::find(auth()->id());
+        $character = Character::find($request->input('id'));
+        $character->save();
+        $character->user()->detach($user);
+        return redirect()->back()->with('status', 'Character has been removed from favorites');
     }
 }
