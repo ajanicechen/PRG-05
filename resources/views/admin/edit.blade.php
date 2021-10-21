@@ -21,24 +21,32 @@
                         </div>
                     @endif
                     @method('PUT')
+                    {{-- Character Name --}}
                     <div class="form-group row">
                         <label for="charName" class="col-sm-2 col-form-label">Character Name</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="charName" name="charName" value="{{ $character->charName }}">
                         </div>
                     </div>
+                    {{-- Character Vision --}}
                     <div class="form-group row">
                         <label for="charVision" class="col-sm-2 col-form-label">Character Vision</label>
-                        <div class="col-sm-4">
-                            <input type="text" class="form-control" id="charVision" name="charVision" value="{{ $character->charVision }}">
+                        <div class="col-sm-3">
+                            <select name="charVision" id="charVision" class="form-control input-lg dynamic" data-dependent="state">
+                                @foreach($visions as $vision)
+                                    <option value="{{ $vision->id }}">{{ $vision->vision }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
+                    {{-- Character Lore --}}
                     <div class="form-group row">
                         <label for="charLore" class="col-sm-2 col-form-label">Character Lore</label>
                         <div class="col-sm-4">
                             <input type="text" class="form-control" id="charLore" name="charLore" value="{{ $character->charLore }}">
                         </div>
                     </div>
+                    {{-- Character Portrait --}}
                     <div class="form-group row">
                         <label for="charPortrait" class="col-sm-2 col-form-label">Character Portrait</label>
                         <div class="col-sm-4">

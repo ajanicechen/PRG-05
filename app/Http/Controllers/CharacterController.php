@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\User;
+use App\Models\Vision;
 use http\Env\Response;
 use Illuminate\Http\Request;
 
@@ -55,7 +56,9 @@ class CharacterController extends Controller
         }
 
         $character = Character::find($id);
-        return view('/admin/edit', ['character' => $character]);
+        $vision = Vision::find($id);
+        $visions = Vision::all();
+        return view('/admin/edit', ['character' => $character, 'vision' => $vision, 'visions'=> $visions]);
     }
 
     //[admin] add a new character
@@ -65,7 +68,8 @@ class CharacterController extends Controller
             abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
 
-        return view('admin/addCharacter');
+        $visions = Vision::all();
+        return view('admin/addCharacter',['visions' => $visions]);
     }
 
     //[admin] details character
@@ -95,10 +99,10 @@ class CharacterController extends Controller
 
         $character = new Character;
         $character->charName = $request->input('charName');
-        $character->charVision = $request->input('charVision');
         $character->charLore = $request->input('charLore');
         $character->charPortrait = $request->input('charPortrait');
         $character->save();
+        $character->vision()->attach($request->input('charVision'));
         return redirect()->back()->with('status','Character Added Succesfully');
 //        $characters = Character::all();
 //        return redirect('/overview');
@@ -120,10 +124,12 @@ class CharacterController extends Controller
 
         $character = Character::find($id);
         $character->charName = $request->input('charName');
-        $character->charVision = $request->input('charVision');
+//        $character->charVision = $request->input('charVision');
         $character->charLore = $request->input('charLore');
         $character->charPortrait = $request->input('charPortrait');
         $character->update();
+        $character->vision()->detach();
+        $character->vision()->attach($request->input('charVision'));
         return redirect()->back()->with('status','Character Updated Succesfully');
     }
 
