@@ -137,4 +137,21 @@ class CharacterController extends Controller
         $character->delete();
         return redirect()->back()->with('status','Character Deleted Successfully');
     }
+
+    //character page
+    public function characterPage($id){
+
+        $character = Character::find($id);
+        return view('/characters/characterPage', ['character' => $character]);
+    }
+
+
+    //toggle switch
+    public function toggle(Request $request){
+        $character = Character::find($request->id);
+        $character->status = $request->status;
+        $character->save();
+
+        return redirect()->back()->with('status', 'Character active status changed');
+    }
 }
