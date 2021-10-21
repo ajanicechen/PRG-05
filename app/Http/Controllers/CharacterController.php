@@ -80,7 +80,8 @@ class CharacterController extends Controller
         }
 
         $character = Character::find($id);
-        return view('/admin/read', ['character' => $character]);
+        $vision = Vision::find($id);
+        return view('/admin/read', ['character' => $character, 'vision' => $vision]);
     }
 
     //[admin] save new character
