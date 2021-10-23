@@ -36,14 +36,14 @@
                     @foreach($characters as $character)
                     <tr>
                         <td>{{ $character->id }}</td>
-                        <td><img src="{{ $character->charPortrait }}" height="150px" width="100px"></td>
-                        <td>{{ $character->charName }}</td>
+                        <td><img src="{{ $character->portrait }}" height="150px" width="100px"></td>
+                        <td>{{ $character->name }}</td>
                         <td>
-                            @foreach($character->vision as $vision)
-                                {{$vision->vision}}
-                            @endforeach
+{{--                            @foreach($character->vision as $vision)--}}
+{{--                                {{$vision->vision}}--}}
+{{--                            @endforeach--}}
                         </td>
-                        <td>{{ $character->charLore }}</td>
+                        <td>{{ $character->lore }}</td>
                         <td>
                             <input data-id="{{ $character->id }}" class="toggle-class" type="checkbox"
                                    data-onstyle="success" data-offstyle="danger"
