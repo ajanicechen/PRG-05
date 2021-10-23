@@ -47,14 +47,12 @@ class CharacterController extends Controller
         //search
         if(request('search')){
             //last added > first added
-            $character = Character::latest();
-            $character->where('charName', 'like', '%' . request('search') . '%')
-                ->orWhere('charVision', 'like', '%' . request('search') . '%')
-                ->orWhere('charLore', 'like', '%' . request('search') . '%');
-            return view('/admin/overview', ['characters' => $character->get()]);
+            $search = request('search');
+            $characters = Character::where('name', 'like', "%$search%")->get();
+            return view('/admin/overview', compact('characters'));
         }
         $characters = Character::all();
-        return view('/admin/overview',['characters' => $characters]);
+        return view('/admin/overview',compact('characters'));
     }
 
     //[admin] edit form

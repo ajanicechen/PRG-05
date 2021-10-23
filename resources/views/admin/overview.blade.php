@@ -40,7 +40,7 @@
                         <td>{{ $character->name }}</td>
                         <td>
 {{--                            @foreach($character->vision as $vision)--}}
-{{--                                {{$vision->vision}}--}}
+                                {{$character->vision->name}}
 {{--                            @endforeach--}}
                         </td>
                         <td>{{ $character->lore }}</td>
