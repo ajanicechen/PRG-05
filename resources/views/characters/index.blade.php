@@ -36,9 +36,7 @@
                         <img class="card-img-top" src="{{$character->portrait}}" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{$character->name}}</h5>
-{{--                            @foreach($character->vision as $vision)--}}
-                                <p class="card-title">Vision: {{--$vision->name--}}</p>
-{{--                            @endforeach--}}
+                                <p class="card-title">Vision: {{$character->vision->name}}</p>
                             <p class="card-text">{{$character->lore}}</p>
                         </div>
 {{--                        <a href="{{ url('/characters/' . $character->id) }}" class="btn btn-primary mb-3">Details</a>--}}
