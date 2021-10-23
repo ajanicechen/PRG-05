@@ -12,10 +12,7 @@
                         <img class="card-img-top" src="{{$character->portrait}}" alt="Image of {{ $character->name }}">
                         <div class="card-body">
                             <h5 class="card-title">{{$character->name}}</h5>
-{{--                            @dd($character->vision)--}}
-{{--                            @foreach($character->vision as $vision)--}}
-{{--                                <p class="card-title">Vision: {{$vision->vision}}</p>--}}
-{{--                            @endforeach--}}
+                            <p class="card-title">Vision: {{$character->vision->name}}</p>
                             <p class="card-text">{{$character->lore}}</p>
                         </div>
                     </div>
