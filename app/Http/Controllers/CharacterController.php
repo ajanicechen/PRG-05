@@ -131,13 +131,13 @@ class CharacterController extends Controller
         ]);
 
         $character = Character::find($id);
-        $character->charName = $request->input('charName');
-//        $character->charVision = $request->input('charVision');
-        $character->charLore = $request->input('charLore');
-        $character->charPortrait = $request->input('charPortrait');
+        $character->name = $request->input('charName');
+        $character->vision_id = $request->input('charVision');
+        $character->lore = $request->input('charLore');
+        $character->portrait = $request->input('charPortrait');
         $character->update();
-        $character->vision()->detach();
-        $character->vision()->attach($request->input('charVision'));
+        //$character->vision()->detach();
+        //$character->vision()->attach($request->input('charVision'));
         return redirect()->back()->with('status','Character Updated Succesfully');
     }
 

@@ -36,9 +36,9 @@
 {{--                                @foreach($character->vision as $vision)--}}
 {{--                                    <option value="{{ $vision->id }}"> {{$vision->vision}}</option>--}}
 {{--                                @endforeach--}}
-{{--                                @foreach($visions as $vision)--}}
-{{--                                    <option value="{{ $vision->id }}">{{ $vision->vision }}</option>--}}
-{{--                                @endforeach--}}
+                                @foreach($visions as $vision)
+                                    <option value="{{ $vision->id }}">{{ $vision->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
