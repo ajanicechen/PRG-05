@@ -33,9 +33,7 @@
                         <label for="charVision" class="col-sm-2 col-form-label">Character Vision</label>
                         <div class="col-sm-3">
                             <select name="charVision" id="charVision" class="form-control input-lg dynamic" data-dependent="state">
-{{--                                @foreach($character->vision as $vision)--}}
-{{--                                    <option value="{{ $vision->id }}"> {{$vision->vision}}</option>--}}
-{{--                                @endforeach--}}
+                                <option value="{{ $vision->id }}"> {{$vision->name}}</option>
                                 @foreach($visions as $vision)
                                     <option value="{{ $vision->id }}">{{ $vision->name }}</option>
                                 @endforeach
