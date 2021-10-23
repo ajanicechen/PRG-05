@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Character;
+use App\Models\Character_Vision;
 use App\Models\User;
 use App\Models\Vision;
 use http\Env\Response;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CharacterController extends Controller
 {
@@ -15,17 +17,24 @@ class CharacterController extends Controller
         //if searched, results only
         if(request('search')){
             //last added > first added
-            $character = Character::latest();
-            $character->where('charName', 'like', '%' . request('search') . '%')
-                ->orWhere('charVision', 'like', '%' . request('search') . '%')
-                ->orWhere('charLore', 'like', '%' . request('search') . '%');
-            return view('/characters/index', ['characters' => $character->get()]);
+            //$character = Character::latest();
+            $search = request('search');
+//            $vision = Vision::all();
+            $characters = Character::where('name', 'like', "%$search%")->get();
+//                ->orWhere('charVision', 'like', '%' . request('search') . '%')
+                //->orWhere('lore', 'like', "%$search%");
+//            $vision->where('visions.vision', 'like', '%' . request('search') . '%')
+//                ->whereColumn('visions.id', 'character_vision.vision_id');
+
+            return view('/characters/index', compact('characters'));
         }
         //loads all characters
         else{
             //first added > last added
             $character = Character::all();
-            return view('/characters/index', ['characters' => $character]);
+            return view('/characters/index', [
+                'characters' => $character
+            ]);
         }
     }
 
