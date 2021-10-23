@@ -39,7 +39,7 @@
                             <select name="charVision" id="charVision" class="form-control input-lg dynamic" data-dependent="state">
                                 <option selected disabled>Character Vision</option>
                                 @foreach($visions as $vision)
-                                <option value="{{ $vision->id }}">{{ $vision->vision }}</option>
+                                <option value="{{ $vision->id }}">{{ $vision->name }}</option>
                                 @endforeach
                             </select>
                         </div>

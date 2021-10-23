@@ -106,11 +106,11 @@ class CharacterController extends Controller
         ]);
 
         $character = new Character;
-        $character->charName = $request->input('charName');
-        $character->charLore = $request->input('charLore');
-        $character->charPortrait = $request->input('charPortrait');
+        $character->name = $request->input('charName');
+        $character->vision_id = $request->input('charVision');
+        $character->lore = $request->input('charLore');
+        $character->portrait = $request->input('charPortrait');
         $character->save();
-        $character->vision()->attach($request->input('charVision'));
         return redirect()->back()->with('status','Character Added Succesfully');
 //        $characters = Character::all();
 //        return redirect('/overview');
