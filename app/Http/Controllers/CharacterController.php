@@ -63,9 +63,14 @@ class CharacterController extends Controller
         }
 
         $character = Character::find($id);
+        //specific vision selection
         $vision = Vision::find($id);
+        //all visions for vision selection
         $visions = Vision::all();
-        return view('/admin/edit', ['character' => $character, 'vision' => $vision, 'visions'=> $visions]);
+        return view('/admin/edit', [
+            'character' => $character,
+            'vision' => $vision,
+            'visions'=> $visions]);
     }
 
     //[admin] add a new character
@@ -171,11 +176,15 @@ class CharacterController extends Controller
     }
 
     public function favorite(Request $request, Character $character){
-        $user = User::find(auth()->id());
-        $character = Character::find($request->input('id'));
-        $character->save();
-        $character->user()->attach($user);
-        return redirect()->back()->with('status', 'Character has been added to favorites');
+        if(auth()->guest()){
+            return redirect()->back()->with('status', 'Please log in first');
+        } else {
+            $user = User::find(auth()->id());
+            $character = Character::find($request->input('id'));
+            $character->save();
+            $character->user()->attach($user);
+            return redirect()->back()->with('status', 'Character has been added to favorites');
+        }
     }
 
     public function unfavorite(Request $request, Character $character){
