@@ -2,6 +2,9 @@
 
 namespace Database\Seeders;
 
+use App\Models\Character;
+use App\Models\Vision;
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +16,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        User::create([
+            'username' => 'adminkun',
+            'role' => 'admin',
+            'email'=> 'i.am.adminkun@mail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$yZUVtEnaVogmABnNIsxW9eIc5JjcgIBUzUsK2k3VRbzrA8MbwF60.'
+        ]);
         // \App\Models\User::factory(10)->create();
+        Character::factory(8)->has(Vision::factory())->create();
+//        Vision::factory(1)->create();
     }
 }
