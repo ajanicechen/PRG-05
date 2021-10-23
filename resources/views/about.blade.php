@@ -1,7 +1,13 @@
 @extends('layouts.app')
 @section('content')
-    <div class="ml-4 text-lg leading-7 font-semibold"><a href="https://laravel.com/docs" class="underline text-gray-900 dark:text-white">The only thing that matters</a></div>
-    <div class="ml-12">
-        <img src="https://c.tenor.com/_1hMqyFC4LEAAAAC/pop-cat.gif" height="250px">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="card w-25">
+            <div class="card-header">
+                <h1>The only thing that matters</h1>
+            </div>
+            <div class="card-body">
+                <img class="card-img-top" src="https://c.tenor.com/_1hMqyFC4LEAAAAC/pop-cat.gif">
+            <div>
+        </div>
     </div>
 @endsection
