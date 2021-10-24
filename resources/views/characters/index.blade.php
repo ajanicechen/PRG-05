@@ -12,7 +12,7 @@
             {{--      Filter      --}}
             <div class="row height d-flex justify-content-center align-items-center">
                 <form action="#" method="GET" class="col-md-6 card-body">
-                    <select name="vision" id="vision" class="form-control input-lg dynamic" data-dependent="state">
+                    <select name="filter" id="filter" class="form-control input-lg dynamic" data-dependent="state">
                         <option selected disabled>-Vision-</option>
                         <option value="Anemo">Anemo</option>
                         <option value="Cryo">Cryo</option>

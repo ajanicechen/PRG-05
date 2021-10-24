@@ -19,23 +19,36 @@ class CharacterController extends Controller
             //last added > first added
             //$character = Character::latest();
             $search = request('search');
-//            $vision = Vision::all();
-            $characters = Character::where('name', 'like', "%$search%")->get();
-//                ->orWhere('charVision', 'like', '%' . request('search') . '%')
-                //->orWhere('lore', 'like', "%$search%");
-//            $vision->where('visions.vision', 'like', '%' . request('search') . '%')
-//                ->whereColumn('visions.id', 'character_vision.vision_id');
-
-            return view('/characters/index', compact('characters'));
+            $characters = Character::join('visions','characters.vision_id','=', 'visions.id')
+                ->where('visions.name', 'like', "%$search%" )
+                ->orWhere('characters.name','like', "%$search%")
+                ->orwhere('characters.lore', 'like', "%$search%")
+                ->get([
+                    'characters.name',
+                    'characters.lore',
+                    'characters.vision_id',
+                    'characters.portrait'
+                ]);
+        } elseif (request('filter')){
+            $filter = request('filter');
+            $characters = Character::join('visions','characters.vision_id','=', 'visions.id')
+                ->where('visions.name', 'like', "%$filter%" )
+                ->orWhere('characters.name','like', "%$filter%")
+                ->orwhere('characters.lore', 'like', "%$filter%")
+                ->get([
+                    'characters.name',
+                    'characters.lore',
+                    'characters.vision_id',
+                    'characters.portrait'
+                ]);
         }
         //loads all characters
         else{
             //first added > last added
-            $character = Character::all();
-            return view('/characters/index', [
-                'characters' => $character
-            ]);
+            $characters = Character::all();
         }
+        return view('/characters/index', compact('characters'));
+
     }
 
     //[Admin] View list of all characters in table
@@ -48,11 +61,22 @@ class CharacterController extends Controller
         if(request('search')){
             //last added > first added
             $search = request('search');
-            $characters = Character::where('name', 'like', "%$search%")->get();
-            return view('/admin/overview', compact('characters'));
+            $characters = Character::join('visions','characters.vision_id','=', 'visions.id')
+                ->where('visions.name', 'like', "%$search%" )
+                ->orWhere('characters.name','like', "%$search%")
+                ->orwhere('characters.lore', 'like', "%$search%")
+                ->get([
+                    'characters.id',
+                    'characters.name',
+                    'characters.lore',
+                    'characters.vision_id',
+                    'characters.portrait'
+                ]);
+        } else {
+            $characters = Character::all();
         }
-        $characters = Character::all();
-        return view('/admin/overview',compact('characters'));
+        return view('/admin/overview', compact('characters'));
+
     }
 
     //[admin] edit form
@@ -93,7 +117,7 @@ class CharacterController extends Controller
 
         $character = Character::find($id);
         $vision = Vision::find($id);
-        return view('/admin/read', ['character' => $character, 'vision' => $vision]);
+        return view('/admin/read', compact('character', 'vision'));
     }
 
     //[admin] save new character
@@ -175,7 +199,7 @@ class CharacterController extends Controller
         return redirect()->back()->with('status', 'Character active status changed');
     }
 
-    public function favorite(Request $request, Character $character){
+    public function favorite(Request $request){
         if(auth()->guest()){
             return redirect()->back()->with('status', 'Please log in first');
         } else {
@@ -187,7 +211,7 @@ class CharacterController extends Controller
         }
     }
 
-    public function unfavorite(Request $request, Character $character){
+    public function unfavorite(Request $request){
         $user = User::find(auth()->id());
         $character = Character::find($request->input('id'));
         $character->save();
