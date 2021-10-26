@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Character;
 use App\Models\Character_Vision;
+use App\Models\Favorite;
 use App\Models\User;
 use App\Models\Vision;
 use http\Env\Response;
@@ -29,12 +30,12 @@ class CharacterController extends Controller
                     'characters.vision_id',
                     'characters.portrait'
                 ]);
-        } elseif (request('filter')){
+        }
+        //if filtered, results only
+        elseif (request('filter')){
             $filter = request('filter');
             $characters = Character::join('visions','characters.vision_id','=', 'visions.id')
                 ->where('visions.name', 'like', "%$filter%" )
-                ->orWhere('characters.name','like', "%$filter%")
-                ->orwhere('characters.lore', 'like', "%$filter%")
                 ->get([
                     'characters.name',
                     'characters.lore',
@@ -42,13 +43,11 @@ class CharacterController extends Controller
                     'characters.portrait'
                 ]);
         }
-        //loads all characters
+        //loads all characters when there is no search or filter
         else{
-            //first added > last added
             $characters = Character::all();
         }
         return view('/characters/index', compact('characters'));
-
     }
 
     //[Admin] View list of all characters in table
@@ -72,7 +71,19 @@ class CharacterController extends Controller
                     'characters.vision_id',
                     'characters.portrait'
                 ]);
-        } else {
+        }
+        elseif (request('filter')){
+            $filter = request('filter');
+            $characters = Character::join('visions','characters.vision_id','=', 'visions.id')
+                ->where('visions.name', 'like', "%$filter%" )
+                ->get([
+                    'characters.name',
+                    'characters.lore',
+                    'characters.vision_id',
+                    'characters.portrait'
+                ]);
+        }
+        else {
             $characters = Character::all();
         }
         return view('/admin/overview', compact('characters'));
@@ -189,16 +200,6 @@ class CharacterController extends Controller
         return view('/characters/characterPage', ['character' => $character]);
     }
 
-
-    //toggle switch
-    public function toggle(Request $request){
-        $character = Character::find($request->id);
-        $character->status = $request->status;
-        $character->save();
-
-        return redirect()->back()->with('status', 'Character active status changed');
-    }
-
     public function favorite(Request $request){
         if(auth()->guest()){
             return redirect()->back()->with('status', 'Please log in first');
@@ -217,5 +218,26 @@ class CharacterController extends Controller
         $character->save();
         $character->user()->detach($user);
         return redirect()->back()->with('status', 'Character has been removed from favorites');
+    }
+
+    //
+    public function getFavorites(){
+        $user = User::find(auth()->id());
+        $characters = Favorite::all();
+        return view('/characters/favorites', compact('characters'));
+
+    }
+
+    //character status update switch
+    public function updateStatus(Request $request){
+
+
+
+        $character = Character::findOrFail($request->character_id);
+        $character->status = $request->status;
+        $character->save();
+
+        return response()->json(['status'=> 'Character active status changed succesfully']);
+        //return redirect()->back()->with('status', 'Character active status changed');
     }
 }

@@ -49,6 +49,8 @@ Route::put('/profile/{username}',[UserController::class,'profileUpdate']);
 Route::get('/characters/{id}', [CharacterController::class, 'characterPage']);
 Route::post('/character/favorite',[CharacterController::class, 'favorite'])->name('favorite');
 Route::post('/character/unfavorite',[CharacterController::class, 'unfavorite'])->name('unfavorite');
+Route::post('/update-status',[CharacterController::class, 'updateStatus']);
+
 
 
 //admin routes
@@ -59,3 +61,5 @@ Route::get('/details/{id}', [CharacterController::class, 'read']);
 Route::get('/edit-character/{id}', [CharacterController::class, 'edit']);
 Route::put('/update-character/{id}', [CharacterController::class, 'update']);
 Route::get('/delete-character/{id}', [CharacterController::class, 'destroy']);
+Route::get('/overview/update-status/', [CharacterController::class, 'updateStatus']);
+

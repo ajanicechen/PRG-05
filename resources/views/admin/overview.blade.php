@@ -1,9 +1,13 @@
 @extends('layouts.app')
 
-{{--@section('head')--}}
-{{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/css/bootstrap-toggle.css" integrity="sha512-9tISBnhZjiw7MV4a1gbemtB9tmPcoJ7ahj8QWIc0daBCdvlKjEA48oLlo6zALYm3037tPYYulT0YQyJIJJoyMQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />--}}
-{{--    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js" integrity="sha512-F636MAkMAhtTplahL9F6KmTfxTmYcAcjcCkyu0f0voT3N/6vzAuJ4Num55a0gEJ+hRLHhdz3vDvZpf6kqgEa5w==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>--}}
-{{--@endsection--}}
+@section('head')
+    {{--    Ajax loading in --}}
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.3.1.min.js"></script>
+
+    {{--    Cloudlfare Toggle   --}}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/switchery/0.8.2/switchery.min.js"></script>
+@endsection
 
 @section('content')
     <div class="container">
@@ -18,6 +22,23 @@
                 </form>
             </div>
         </div>
+        {{--      Filter      --}}
+        <div class="row {{--height--}} d-flex justify-content-center align-items-center">
+            <form action="#" method="GET" class="col-md-6 card-body">
+                <select name="filter" id="filter" class="form-control input-lg dynamic" data-dependent="state">
+                    <option selected disabled>-Vision-</option>
+                    <option value="Anemo">Anemo</option>
+                    <option value="Cryo">Cryo</option>
+                    <option value="Dendro">Dendro</option>
+                    <option value="Electro">Electro</option>
+                    <option value="Geo">Geo</option>
+                    <option value="Hydro">Hydro</option>
+                    <option value="Pyro">Pyro</option>
+                </select>
+                <button type="submit" class="btn btn-primary float-right">Filter</button>
+            </form>
+        </div>
+        {{--        table       --}}
         <div class="card">
             <div class="card-header">
                 <h1>Overview All Characters</h1>
@@ -36,7 +57,7 @@
                     @foreach($characters as $character)
                     <tr>
                         <td>{{ $character->id }}</td>
-                        <td><img src="{{ $character->portrait }}" height="150px" width="100px"></td>
+                        <td><img src="{{ $character->portrait }}" height="100" width="100"></td>
                         <td>{{ $character->name }}</td>
                         <td>
 {{--                            @foreach($character->vision as $vision)--}}
@@ -45,10 +66,13 @@
                         </td>
                         <td>{{ $character->lore }}</td>
                         <td>
-                            <input data-id="{{ $character->id }}" class="toggle-class" type="checkbox"
-                                   data-onstyle="success" data-offstyle="danger"
-                                   data-toggle="toggle" data-on="Active"
-                                   data-off="Inactive" {{ $character->status ? 'checked' : '' }}>
+                            <input type="checkbox" data-id="{{ $character->id }}" name="status" class="js-switch" {{ $character->status == 1 ? 'checked' : '' }}>
+
+{{--                            <input type="checkbox" data-id="{{$character->id}}" name="status" class="js-switch" {{$character->status == 1 ? 'checked' : ''}}>--}}
+{{--                            <input data-id="{{ $character->id }}" class="toggle-class" type="checkbox"--}}
+{{--                                   data-onstyle="success" data-offstyle="danger"--}}
+{{--                                   data-toggle="toggle" data-on="Active"--}}
+{{--                                   data-off="Inactive" {{ $character->status ? 'checked' : '' }}>--}}
                         </td>
                         <td><a class="btn btn-primary" href="{{ url('details/'.$character->id) }}">Details</a></td>
                         <td><a class="btn btn-primary" href="{{ url('edit-character/'.$character->id) }}">Edit</a></td>
@@ -61,25 +85,13 @@
     </div>
 @endsection
 
-{{--@section('script')--}}
-{{--    <script>--}}
-{{--        $(document).ready(function(){--}}
-{{--            $("#character_table").DataTable()--}}
-{{--        });--}}
-{{--        $(function(){--}}
-{{--           $('.toggle-class').change(function(){--}}
-{{--               var status = $(this).prop('checked') == true ? 1 : 0;--}}
-{{--               var character_id = $(this).data('id');--}}
-{{--                    $.ajax({--}}
-{{--                        type: "GET",--}}
-{{--                        dataType: "json",--}}
-{{--                        url: '/changeStatus',--}}
-{{--                        data: {'status': status, 'character_id': character_id},--}}
-{{--                        success: function(data){--}}
-{{--                            console.log(data.success)--}}
-{{--                        }--}}
-{{--                    })--}}
-{{--           })--}}
-{{--        });--}}
-{{--    </script>--}}
-{{--@endsection--}}
+@section('script')
+    <script>
+        let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+        elems.forEach(function(html) {
+            let switchery = new Switchery(html,  { size: 'small' });
+        });
+    </script>
+    <script src="{{asset("js/main.js")}}"></script>
+@endsection
