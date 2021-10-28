@@ -28,6 +28,7 @@ class CharacterController extends Controller
                     'characters.name',
                     'characters.lore',
                     'characters.vision_id',
+                    'characters.status',
                     'characters.portrait'
                 ]);
         }
@@ -40,6 +41,7 @@ class CharacterController extends Controller
                     'characters.name',
                     'characters.lore',
                     'characters.vision_id',
+                    'characters.status',
                     'characters.portrait'
                 ]);
         }
@@ -54,7 +56,8 @@ class CharacterController extends Controller
     public function overview(){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
+//            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
         }
         //search
         if(request('search')){
@@ -69,6 +72,7 @@ class CharacterController extends Controller
                     'characters.name',
                     'characters.lore',
                     'characters.vision_id',
+                    'characters.status',
                     'characters.portrait'
                 ]);
         }
@@ -80,6 +84,7 @@ class CharacterController extends Controller
                     'characters.name',
                     'characters.lore',
                     'characters.vision_id',
+                    'characters.status',
                     'characters.portrait'
                 ]);
         }
@@ -94,7 +99,7 @@ class CharacterController extends Controller
     public function edit($id){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $character = Character::find($id);
@@ -112,7 +117,7 @@ class CharacterController extends Controller
     public function create(){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $visions = Vision::all();
@@ -123,7 +128,7 @@ class CharacterController extends Controller
     public function read($id){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $character = Character::find($id);
@@ -135,7 +140,7 @@ class CharacterController extends Controller
     public function store(Request $request){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $request->validate([
@@ -160,7 +165,7 @@ class CharacterController extends Controller
     public function update(Request $request, $id){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $request->validate([
@@ -185,7 +190,7 @@ class CharacterController extends Controller
     public function destroy($id){
 
         if(auth()->guest() || auth()->user()->role != 'admin'){
-            abort(\Symfony\Component\HttpFoundation\Response::HTTP_FORBIDDEN);
+            return redirect('/');
         }
 
         $character = Character::find($id);
@@ -231,13 +236,10 @@ class CharacterController extends Controller
     //character status update switch
     public function updateStatus(Request $request){
 
-
-
         $character = Character::findOrFail($request->character_id);
         $character->status = $request->status;
         $character->save();
 
         return response()->json(['status'=> 'Character active status changed succesfully']);
-        //return redirect()->back()->with('status', 'Character active status changed');
     }
 }

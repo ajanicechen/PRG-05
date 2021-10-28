@@ -45,11 +45,11 @@ class Character extends Model
     ];
 
     public function user():BelongsToMany{
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'character_user');
     }
 
     public function vision(){
 //        return $this->belongsToMany(Vision::class);
-        return $this->belongsTo(Vision::Class);
+        return $this->belongsTo(Vision::Class, 'vision_id');
     }
 }

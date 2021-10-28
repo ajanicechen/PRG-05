@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="align-content-center">
-                        <a href="/overview" class="btn btn-primary">Back</a>
+                        <a href="javascript:history.back()" class="btn btn-primary">Back</a>
                         <button type="submit" class="btn btn-primary">Save Edit</button>
                     </div>
                 </form>

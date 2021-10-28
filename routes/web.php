@@ -52,7 +52,6 @@ Route::post('/character/unfavorite',[CharacterController::class, 'unfavorite'])-
 Route::post('/update-status',[CharacterController::class, 'updateStatus']);
 
 
-
 //admin routes
 Route::get('/overview', [CharacterController::class,'overview']);
 Route::get('/add-character',[CharacterController::class,'create']);

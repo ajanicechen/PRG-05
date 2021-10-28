@@ -11,9 +11,6 @@
 
 @section('content')
     <div class="container">
-        @if(session('status'))
-            <h6 class="alert alert-success">{{ session('status') }}</h6>
-        @endif
         {{--      Searchbar      --}}
         <div class="row height d-flex justify-content-center align-items-center">
             <div class="col-md-6 card-body">
@@ -38,6 +35,9 @@
                 <button type="submit" class="btn btn-primary float-right">Filter</button>
             </form>
         </div>
+        @if(session('status'))
+            <h6 class="alert alert-success">{{ session('status') }}</h6>
+        @endif
         {{--        table       --}}
         <div class="card">
             <div class="card-header">
@@ -66,13 +66,8 @@
                         </td>
                         <td>{{ $character->lore }}</td>
                         <td>
-                            <input type="checkbox" data-id="{{ $character->id }}" name="status" class="js-switch" {{ $character->status == 1 ? 'checked' : '' }}>
-
-{{--                            <input type="checkbox" data-id="{{$character->id}}" name="status" class="js-switch" {{$character->status == 1 ? 'checked' : ''}}>--}}
-{{--                            <input data-id="{{ $character->id }}" class="toggle-class" type="checkbox"--}}
-{{--                                   data-onstyle="success" data-offstyle="danger"--}}
-{{--                                   data-toggle="toggle" data-on="Active"--}}
-{{--                                   data-off="Inactive" {{ $character->status ? 'checked' : '' }}>--}}
+                            <input type="checkbox" data-id="{{ $character->id }}" name="status"
+                                   class="js-switch" {{ $character->status == 1 ? 'checked' : '' }}>
                         </td>
                         <td><a class="btn btn-primary" href="{{ url('details/'.$character->id) }}">Details</a></td>
                         <td><a class="btn btn-primary" href="{{ url('edit-character/'.$character->id) }}">Edit</a></td>
