@@ -20,19 +20,14 @@
                             </ul>
                         </div>
                     @endif
+                    {{--     Character Name      --}}
                     <div class="form-group row">
                         <label for="charName" class="col-sm-2 col-form-label">Character Name</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="charName" name="charName" placeholder="Character Name">
                         </div>
                     </div>
-{{--                    <div class="form-group row">--}}
-{{--                        <label for="charVision" class="col-sm-2 col-form-label">Character Vision</label>--}}
-{{--                        <div class="col-sm-3">--}}
-{{--                            <input type="text" class="form-control" id="charVision" name="charVision" placeholder="Character Vision">--}}
-{{--                        </div>--}}
-{{--                    </div>--}}
-
+                    {{--     Character Vision      --}}
                     <div class="form-group row">
                         <label for="charVision" class="col-sm-2 col-form-label">Character Vision</label>
                         <div class="col-sm-3">
@@ -44,13 +39,14 @@
                             </select>
                         </div>
                     </div>
-
+                    {{--     Character Lore      --}}
                     <div class="form-group row">
                         <label for="charLore" class="col-sm-2 col-form-label">Character Lore</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" id="charLore" name="charLore" placeholder="Character Lore">
                         </div>
                     </div>
+                    {{--     Character Portrait      --}}
                     <div class="form-group row">
                         <label for="charPortrait" class="col-sm-2 col-form-label">Character Portrait</label>
                         <div class="col-sm-3">

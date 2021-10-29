@@ -40,20 +40,18 @@
                                     <p class="card-title">Vision: {{$character->vision->name}}</p>
                                 <p class="card-text">{{$character->lore}}</p>
                             </div>
-    {{--                        <a href="{{ url('/characters/' . $character->id) }}" class="btn btn-primary mb-3">Details</a>--}}
-
                             {{-- If already faved, [unfav button] --}}
                             @if($character->user()->find(Auth::id()))
                                 <form class="justify-content-center" action="{{ route('unfavorite', $character)  }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
+                                    <input type="hidden" id="id" name="id" value="{{$character->id}}">
                                     <button type="submit" class="btn btn-danger mb-3">Unfavorite</button>
                                 </form>
                             {{-- if not faved, [fave button] --}}
                             @elseif($character->user()->find(Auth::id()) === null)
                                 <form action="{{ route('favorite', $character)  }}" method="post" enctype="multipart/form-data">
                                     @csrf
-                                    <input type="id" id="id" name="id" value="{{$character->id}}" hidden>
+                                    <input type="hidden" id="id" name="id" value="{{$character->id}}">
                                     <button type="submit" class="btn btn-primary mb-3">Favorite</button>
                                 </form>
                             @endif

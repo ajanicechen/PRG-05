@@ -32,7 +32,7 @@ class Vision extends Model
         'name'
     ];
 
-    public function character():BelongsToMany{
+    public function character(){
         return $this->hasMany(Character::class);
     }
 }

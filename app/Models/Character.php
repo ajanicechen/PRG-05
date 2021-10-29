@@ -49,7 +49,6 @@ class Character extends Model
     }
 
     public function vision(){
-//        return $this->belongsToMany(Vision::class);
         return $this->belongsTo(Vision::Class, 'vision_id');
     }
 }

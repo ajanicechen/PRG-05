@@ -23,8 +23,6 @@ class DatabaseSeeder extends Seeder
             'email_verified_at' => now(),
             'password' => '$2y$10$yZUVtEnaVogmABnNIsxW9eIc5JjcgIBUzUsK2k3VRbzrA8MbwF60.'
         ]);
-        // \App\Models\User::factory(10)->create();
         Character::factory(8)->has(Vision::factory())->create();
-//        Vision::factory(1)->create();
     }
 }

@@ -54,9 +54,6 @@
                             <input type="text" class="form-control" id="charPortrait" name="charPortrait" value="{{ $character->portrait }}">
                         </div>
                     </div>
-{{--                    <div>--}}
-{{--                        <img src="{{ $character["charPortrait"] }}">--}}
-{{--                    </div>--}}
                     <div class="align-content-center">
                         <a href="/overview" class="btn btn-primary">Back</a>
                         <button type="submit" class="btn btn-primary">Save Edit</button>

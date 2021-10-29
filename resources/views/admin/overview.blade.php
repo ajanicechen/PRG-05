@@ -59,11 +59,7 @@
                         <td>{{ $character->id }}</td>
                         <td><img src="{{ $character->portrait }}" height="100" width="100"></td>
                         <td>{{ $character->name }}</td>
-                        <td>
-{{--                            @foreach($character->vision as $vision)--}}
-                                {{$character->vision->name}}
-{{--                            @endforeach--}}
-                        </td>
+                        <td>{{$character->vision->name}}</td>
                         <td>{{ $character->lore }}</td>
                         <td>
                             <input type="checkbox" data-id="{{ $character->id }}" name="status"
