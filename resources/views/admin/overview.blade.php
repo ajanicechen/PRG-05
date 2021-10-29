@@ -78,8 +78,10 @@
 
 @section('script')
     <script>
+        //get all checkbox with class "js-switch" and put in array
         let elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
 
+        //turn each checkbox into switch
         elems.forEach(function(html) {
             let switchery = new Switchery(html,  { size: 'small' });
         });
